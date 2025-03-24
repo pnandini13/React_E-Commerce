@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
-
+import productData from "../productData";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -23,10 +23,10 @@ const Products = () => {
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products/");
+      // const response = await fetch("https://fakestoreapi.com/products/");
       if (componentMounted) {
-        setData(await response.clone().json());
-        setFilter(await response.json());
+        setData(productData);
+        //setFilter(await response.json());
         setLoading(false);
       }
 
@@ -83,27 +83,27 @@ const Products = () => {
           </button>
           <button
             className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("men's clothing")}
+            onClick={() => filterProduct("medicines")}
           >
-            Men's Clothing
+           Medicines
           </button>
           <button
             className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("women's clothing")}
+            onClick={() => filterProduct("supplements")}
           >
-            Women's Clothing
+           Supplements
           </button>
           <button
             className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("jewelery")}
+            onClick={() => filterProduct("medical devices")}
           >
-            Jewelery
+           Medical devices
           </button>
           <button
             className="btn btn-outline-dark btn-sm m-2"
-            onClick={() => filterProduct("electronics")}
+            onClick={() => filterProduct("healthcare products")}
           >
-            Electronics
+            healthcare products
           </button>
         </div>
 
@@ -117,7 +117,7 @@ const Products = () => {
               <div className="card text-center h-100" key={product.id}>
                 <img
                   className="card-img-top p-3"
-                  src={product.image}
+                  src={`/Images/${product.image}`}
                   alt="Card"
                   height={300}
                 />

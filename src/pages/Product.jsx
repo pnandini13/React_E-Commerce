@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
-
+import productData from "../productData";
 import { Footer, Navbar } from "../components";
 
 const Product = () => {
@@ -20,23 +20,23 @@ const Product = () => {
     dispatch(addCart(product));
   };
 
-  useEffect(() => {
-    const getProduct = async () => {
-      setLoading(true);
-      setLoading2(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-      setLoading(false);
-      const response2 = await fetch(
-        `https://fakestoreapi.com/products/category/${data.category}`
-      );
-      const data2 = await response2.json();
-      setSimilarProducts(data2);
-      setLoading2(false);
-    };
-    getProduct();
-  }, [id]);
+  //import productsData from "../products.json"; // Ensure the correct path
+
+useEffect(() => {
+  // Find the product by ID
+  const selectedProduct = productData.find((item) => item.id === Number(id));
+
+  if (selectedProduct) {
+    setProduct(selectedProduct);
+
+    // Find similar products based on category
+    const relatedProducts = productData.filter(
+      (item) => item.category === selectedProduct.category && item.id !== selectedProduct.id
+    );
+    setSimilarProducts(relatedProducts);
+  }
+}, [id]);
+
 
   const Loading = () => {
     return (
@@ -69,7 +69,7 @@ const Product = () => {
             <div className="col-md-6 col-sm-12 py-3">
               <img
                 className="img-fluid"
-                src={product.image}
+                src={`/Images/${product.image}`}
                 alt={product.title}
                 width="400px"
                 height="400px"
@@ -133,7 +133,7 @@ const Product = () => {
                 <div key={item.id} className="card mx-4 text-center">
                   <img
                     className="card-img-top p-3"
-                    src={item.image}
+                    src={`/Images/${item.image}`}
                     alt="Card"
                     height={300}
                     width={300}
