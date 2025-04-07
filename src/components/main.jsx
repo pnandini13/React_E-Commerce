@@ -6,10 +6,10 @@ const Home = () => {
       <div className="hero border-1 pb-3">
         <div className="card bg-dark text-white border-0 mx-3">
           <img
-            className="card-img img-fluid"
+            className="card-img"
             src="./assets/bg2.jpg"
             alt="Card"
-            height={500}
+            style={{ height: "500px", width: "auto" }}
           />
         </div>
       </div>
