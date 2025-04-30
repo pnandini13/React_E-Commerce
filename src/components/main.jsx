@@ -7,7 +7,7 @@ const Home = () => {
         <div className="card bg-dark text-white border-0 mx-3">
           <img
             className="card-img"
-            src="./assets/bg2.jpg"
+            src="./assets/medoc.jpg"
             alt="Card"
             style={{ height: "500px", width: "auto" }}
           />
